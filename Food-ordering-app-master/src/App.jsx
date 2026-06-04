@@ -7,19 +7,23 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // ✅ very important
 import { Toaster } from "react-hot-toast";
-import Login from "./Auth/Login.jsx"
+import Login from "./Auth/Login.jsx";
 import Signup from "./Auth/SignUp.jsx";
-
+import Navbar from "./components/Navbar.jsx";
+import HomePage from "./components/HomePage.jsx";
 
 const App = () => {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Signup/>} />
-          <Route path="/home" element={<Home/>} />
+          <Route path="/" element={<> <Navbar />  <HomePage /> </>} />
+          <Route path="/home" element={<Home />} />
 
-          <Route path="/success" element={<ProtectedRoute element={<Success />} />} />
+          <Route
+            path="/success"
+            element={<ProtectedRoute element={<Success />} />}
+          />
           <Route path="/*" element={<Error />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
@@ -38,14 +42,9 @@ const App = () => {
         pauseOnHover
         theme="colored"
       />
-       <Toaster position="top-center" />
+      <Toaster position="top-center" />
     </>
   );
 };
 
 export default App;
-
-
-
-
-
