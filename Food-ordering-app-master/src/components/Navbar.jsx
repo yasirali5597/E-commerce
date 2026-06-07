@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { setSearch } from "../redux/slices/SearchSlice";
 import { Search, ShoppingBag } from "lucide-react";
 import { useState, useEffect } from "react";
-
+import HomePage from "../components/HomePage"
 import { useDispatch, useSelector } from "react-redux";
 
 const Navbar = () => {
@@ -28,7 +28,7 @@ const totalQty = cart.reduce(
   const handleLogout =()=>{
     localStorage.removeItem("user"); 
     setIsLoggedIn(false);
-    navigate("/login");
+    navigate("/");
   }
 
   return (
