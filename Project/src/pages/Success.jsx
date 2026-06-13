@@ -46,7 +46,7 @@ const Success = ({
   // 3. Redirect after countdown hits zero
   useEffect(() => {
     if (!loading && countdown === 0) {
-      navigate(redirectTo);
+      navigate("/Dashboard");
     }
   }, [countdown, loading, navigate, redirectTo]);
 

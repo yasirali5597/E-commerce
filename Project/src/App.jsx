@@ -11,6 +11,8 @@ import Login from "./Auth/Login.jsx";
 import Signup from "./Auth/SignUp.jsx";
 import Navbar from "./components/Navbar.jsx";
 import HomePage from "./components/HomePage.jsx";
+import ProductDetails from "./pages/ProductDetails.jsx";
+
 
 const App = () => {
   return (
@@ -18,7 +20,16 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<> <Navbar />  <HomePage /> </>} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/product/:id" element={<ProductDetails/>} />
+          <Route path="/product" element={<ProductDetails/>} />
+          <Route path="/cart" element={<ProductDetails/>} />
+          <Route path="/WishList" element={<ProductDetails/>} />
+
+
+
+
+
+          <Route path="/Dashboard" element={<Home />} />
 
           <Route
             path="/success"
@@ -42,6 +53,7 @@ const App = () => {
         pauseOnHover
         theme="colored"
       />
+      
       <Toaster position="top-center" />
     </>
   );

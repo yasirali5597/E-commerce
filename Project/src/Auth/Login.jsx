@@ -9,7 +9,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) => {   
     e.preventDefault();
     const isLoggedIn = JSON.parse(localStorage.getItem("user"));
 
@@ -23,8 +23,10 @@ const Login = () => {
     }
     toast.success(`Login successful! Welcome back, ${isLoggedIn.name}!`);
     // toast.success(`Welcome ${isLoggedIn.name}!`); 
-    navigate("/home");
+    navigate("/Dashboard");
   };
+
+
   return (
     // <div>
     <div className="w-full h-screen flex flex-col justify-center items-center bg-black  text-white border">

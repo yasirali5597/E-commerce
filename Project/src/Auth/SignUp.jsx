@@ -4,7 +4,8 @@ import {toast} from "react-toastify"
 
 const Signup = () => {
 
-    const navigate=useNavigate();
+    // const navigate=useNavigate();
+
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -19,14 +20,14 @@ const Signup = () => {
         e.preventDefault();
         const user = {
             name,  
-            email , 
+            email, 
             password, 
             confirmPassword,
             
         }
 
         localStorage.setItem("user" , JSON.stringify(user));
-        alert("acccount created successfully ");
+        // alert("account created successfully ");
         toast.success("account created successfully")
 
         setName("");
@@ -38,7 +39,7 @@ const Signup = () => {
 
     }
 
-    const navigare = useNavigate();
+    const navigate = useNavigate();
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center bg-black text-white">
       <form 
@@ -110,7 +111,7 @@ const Signup = () => {
 
         <p className=" text-gray-400 mt-1 text-xs text-right">
           Already have an account?{" "}
-          <span className="text-emerald-500 cursor-pointer hover:underline" onClick={()=> navigare("/login")}>
+          <span className="text-emerald-500 cursor-pointer hover:underline" onClick={()=> navigate("/login")}>
             Login
           </span>
         </p>

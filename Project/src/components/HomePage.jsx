@@ -1,4 +1,5 @@
 import React from "react";
+import IconsBtn from "../comman/IconBtn";
 
 const HomePage = () => {
   const products = [
@@ -39,9 +40,13 @@ const HomePage = () => {
           <p className="text-lg text-gray-300 mb-6">
             Discover the latest products at unbeatable prices.
           </p>
-          <button className="bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition">
+          {/* <button className="bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-300 transition">
             Shop Now
-          </button>
+          </button> */}
+           <IconsBtn
+            text="shop More" 
+            onClick={() => console.log("clicked the buttons ")}
+            ></IconsBtn> 
         </div>
       </section>
 
@@ -95,6 +100,11 @@ const HomePage = () => {
                 <button className="w-full mt-4 bg-black text-white py-2 rounded-lg hover:bg-gray-800">
                   Add To Cart
                 </button>
+
+                {/* <IconsBtn
+                  text="Learn More" 
+                  onClick={() => console.log("clicked the buttons ")}
+                  ></IconsBtn> */}
               </div>
             </div>
           ))}
