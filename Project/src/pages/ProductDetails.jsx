@@ -15,7 +15,7 @@ const ProductDetails = () => {
 
   if (!product) {
     return (
-      <div className="text-center mt-20 text-3xl font-bold">
+      <div className="text-center mt-20 text-3xl font-bold text-red-700">
         Product Not Found
       </div>
     );
