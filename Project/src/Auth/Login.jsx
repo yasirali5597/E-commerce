@@ -36,12 +36,12 @@ const Login = () => {
       >
         <h1 className="text-3xl font-bold mb-4 text-emerald-500 ">Login</h1>
         <div className="mb-5 flex flex-col gap-2 ">
-          <label> User Name</label>
+          <label>Email</label>
           <input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             type="text"
-            placeholder="Enter User Name"
+            placeholder="Enter Email"
             className="bg-gray-800 text-white placeholder:text-gray-500 border border-gray-600  rounded-md px-4 py-1 "
           />
         </div>
