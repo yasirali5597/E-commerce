@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 // import useDispatch   from "react-redux"
 import { useDispatch,useSelector  } from "react-redux";
 import { clearCart } from "../redux/slices/CartSlice.jsx";
+import toast from "react-hot-toast";
 
 const Cart = () => {
   // const cartItems = useSelector((state) => state.cart.cart);
@@ -33,13 +34,18 @@ const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // const handleClick = ()=>{
+  //   toast.success("Order Successfull !")
+  // }
+
   const handleSuccess = () =>{
     console.log("before"  , cartItems)
     dispatch(clearCart());
     // localStorage.clear();
     localStorage.removeItem("persist:root");
-    console.log("Clear Cart Clicked")
-    console.log("after clicked"  , cartItems)
+    // console.log("Clear Cart Clicked")
+    // console.log("after clicked"  , cartItems)
+    // handleClick()
 
 
     navigate("/success")
@@ -52,9 +58,9 @@ const Cart = () => {
           activeCart ? "translate-x-0" : "translate-x-full"
         } transition-all duration-500 z-50`}
       >
-        <div className="flex justify-between items-center my-3  ">
+        <div className=" flex justify-between items-center my-3  ">
           <span className="text-lg md:text-xl font-bold text-gray-100">
-            My Order !
+            My Orders !
           </span>
           <FaWindowClose
             onClick={() => {
@@ -63,7 +69,8 @@ const Cart = () => {
             className="ml-auto text-2xl cursor-pointer p-1 rounded-md  border transition-colors text-white "
           />
         </div>
-        {cartItems.length > 0 ? (
+        <div className="overflow-y-auto h-[calc(100vh-270px)] mt-7">
+         {cartItems.length > 0 ? (
           cartItems.map((food) => {
             return (
               <ItemCart
@@ -83,19 +90,22 @@ const Cart = () => {
           </h2>
         )}
 
+        </div>
+       
+
         {/* Cart items and content go here */}
-        <div className="absolute bottom-0 ">
+        <div className=" absolute bottom-0 text-lg ">
           <h3 className="font-semibold text-gray-100">Items :{totalQty}</h3>
           <h3 className="font-semibold text-gray-100">
             Total Amount :{totalAmount}
           </h3>
-          <hr className="w-[90vw] lg:w-[18vw] my-2" />
+          <hr className="w-[90vw] lg:w-[18vw] my-6" />
           <button
-            // onClick={() => navigate("/success")}
-            onClick={handleSuccess}
-            className="bg-green-500 font-bold px-3 text-white py-2 rounded-lg w-[50vw] lg:w-[18vw] mb-5 md:text-center"
+            onClick={() => navigate("/success")}
+            // onClick={handleSuccess}
+            className="bg-green-500 font-bold px-3 hover:text-black text-white py-2 rounded-lg w-[50vw] lg:w-[18vw] mb-5 md:text-center hover:bg-emerald-600"
           >
-            Checkout
+            Order Successfully
           </button>
         </div>
       </div>

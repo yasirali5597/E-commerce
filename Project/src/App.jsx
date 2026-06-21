@@ -12,6 +12,8 @@ import Signup from "./Auth/SignUp.jsx";
 import Navbar from "./components/Navbar.jsx";
 import HomePage from "./components/HomePage.jsx";
 import ProductDetails from "./pages/ProductDetails.jsx";
+import Product from "./Navbar/Products..jsx";
+import Cart from "./Navbar/Cart.jsx";
 
 
 const App = () => {
@@ -21,8 +23,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<> <Navbar />  <HomePage /> </>} />
           <Route path="/product/:id" element={<ProductDetails/>} />
-          <Route path="/product" element={<ProductDetails/>} />
-          <Route path="/cart" element={<ProductDetails/>} />
+          <Route path="/product" element={<Product/>} />
+          <Route path="/cart" element={<Cart/>} />
           <Route path="/WishList" element={<ProductDetails/>} />
 
 

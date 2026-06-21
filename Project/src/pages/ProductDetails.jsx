@@ -1,8 +1,12 @@
 import { useParams } from "react-router-dom";
 import ProductData from "../data/ProductData";
 import Navbar from "../components/Navbar";
+import { RxCross2 } from "react-icons/rx";
+import { useNavigate } from "react-router-dom";
+
 
 const ProductDetails = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
 
   const product = ProductData.find(
@@ -18,13 +22,15 @@ const ProductDetails = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-400">
+    <div className="min-h-screen bg-gray-800">
       <Navbar />
 
-      <div className="max-w-6xl mx-auto px-8 py-10 ">
-        <div className="bg-gray-600 rounded-2xl border-emerald-700 shadow-lg overflow-hidden grid md:grid-cols-2 gap-8 p-6">
+      <div className="max-w-7xl mx-auto px-8 py-12 ">
+        <div className="bg-gray-500 rounded-2xl border-emerald-700 shadow-lg overflow-hidden grid md:grid-cols-2 gap-8 p-6">
 
           {/* Image */}
+          
+
           <div className="flex justify-center items-center">
             <img
               src={product.img}
@@ -34,8 +40,14 @@ const ProductDetails = () => {
           </div>
 
           {/* Details */}
-          <div className="flex flex-col justify-center">
-            <p className="text-sm text-black uppercase">
+          <div className=" justify-between">
+            <div 
+            onClick={() => navigate(-1)}
+            className="ml-[330px] mb-3 font-bold text-lg hover:text-black border rounded-full cursor-pointer">
+              <RxCross2 />
+            </div>
+            <div className="flex flex-col ">
+              <p className="text-sm text-black uppercase">
               {product.category}
             </p>
 
@@ -48,7 +60,7 @@ const ProductDetails = () => {
             </p>
 
             <div className="mt-5">
-              <span className="text-3xl font-bold text-green-600">
+              <span className="text-3xl font-bold text-black-600">
                 ₹{product.price}
               </span>
             </div>
@@ -74,8 +86,10 @@ const ProductDetails = () => {
                 <span className="font-semibold">
                   Stock:
                 </span>{" "}
-                Available
+                <span className="text-blue-600">Available</span>
               </p>
+            </div>
+              
             </div>
 
             <div className="flex gap-4 mt-8">

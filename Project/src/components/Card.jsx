@@ -2,12 +2,12 @@
 import React, { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../redux/slices/CartSlice";
+import { addToCart,placeOrder } from "../redux/slices/CartSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 // import 
 
-const FoodCard = ({ id, name, price, desc, img, rating, handletoast }) => {
+const FoodCard = ({ id, name, price, desc, img, rating, handleToast }) => {
 
   const [showDetails , setShowDetails] = useState(false)
 
@@ -16,21 +16,42 @@ const FoodCard = ({ id, name, price, desc, img, rating, handletoast }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  //  Get cart items from Redux store
-  const cartItems = useSelector((state) => state.cart.cartItems);
+ 
+  const cartItems = useSelector((state) => state.cart.cart);
 
-  //  Fixed: Renamed and used the correct function name
+  
   const handleOrderNow = () => {
-    dispatch(addToCart({ id, name, price, img, rating, qty: 1 }));
-    handletoast(`Order placed for ${name}`);
-    if (cartItems.length === 0) {
-      toast.error("Your cart is empty!");
-      return;
+    dispatch(placeOrder({ id, name, price, img, rating, qty: 1 }));
+    handleToast(`Order placed for ${name}`);
+  //   if (cartItems.length === 0) {
+  //     toast.error("Your cart is empty!");
+  //     return;
     
-    // Redirect to checkout page
+    
+  //   navigate("/checkout");
+  // };
     navigate("/checkout");
-  };
+
 }
+
+//   const handleCartNow = () => {
+//     dispatch(addToCartFirst({ id, name, price, img, rating, qty: 1 }));
+//     // handletoast(`Order placed for ${name}`);
+//     if (cartItems.length === 0) {
+//       toast.error("Your cart is empty!");
+//       return;
+    
+//     // Redirect to0 checkout page
+//     // navigate("/checkout");
+//   };
+// }
+
+const handleCartNow = () => {
+  dispatch(addToCart({ id, name, price, img, rating, qty: 1 }));
+
+  toast.success(`${name} added to cart`);
+};
+
 
   return (
     <div 
@@ -86,17 +107,19 @@ const FoodCard = ({ id, name, price, desc, img, rating, handletoast }) => {
       {/* Buttons Section */}
       <div className="mt-3 flex justify-between gap-2">
         <button
-          onClick={() => {
-            dispatch(addToCart({ id, name, price, img, rating, qty: 1 }));
-            handletoast(name);
-          }}
-          className="flex-1 p-2 text-sm font-semibold text-white bg-gray-600 hover:bg-green-600 rounded-lg transition-colors"
+          // onClick={() => {
+          //   dispatch(addToCart({ id, name, price, img, rating, qty: 1 }));
+          //   handletoast(name);
+          // }}
+            onClick={handleCartNow}
+          className="flex-1 p-2 text-sm font-semibold text-white bg-gray-800 hover:bg-gray-900 rounded-lg transition-colors  border"
         >
-          Add to Cart...
+          Add to Cart
         </button>
+
         <button
-          onClick={handleOrderNow}
-          className="flex-1 p-2 text-sm font-semibold text-white bg-black hover:bg-gray-800 rounded-lg transition-colors"
+          onClick={handleCartNow}
+          className="flex-1 p-2 text-sm font-semibold text-white bg-black hover:bg-gray-800 rounded-lg transition-colors border"
         >
           Order Now
         </button>
