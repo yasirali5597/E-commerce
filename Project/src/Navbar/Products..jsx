@@ -164,6 +164,7 @@ const Product = () => {
 
        
       </div>
+      <div className="border-b border-gray-300"><Footer/></div>
        
       
 

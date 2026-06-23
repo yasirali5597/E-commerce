@@ -26,11 +26,17 @@ const FoodItems = () => {
   const [page, setPage] = useState(1);
   const [shuffleSeed, setShuffleSeed] = useState(0); // 👈 triggers re-shuffle
 
-  const [favorites, setFavorites] = useState(() => {
-    const saved = localStorage.getItem("favorites");
-    return saved ? JSON.parse(saved) : [];
-  });
+  // const [favorites, setFavorites] = useState(() => {
+  //   const saved = localStorage.getItem("favorites");
+  //   return saved ? JSON.parse(saved) : [];
+  // });
 
+  const [favorites, setFavorites] = useState(() => {
+  const wishlist =
+    JSON.parse(localStorage.getItem("wishlist")) || [];
+
+  return wishlist.map((item) => item.id);
+});
   const toggleFavorite = (id) => {
     setFavorites((prev) => {
       const isFav = prev.includes(id);
@@ -47,8 +53,8 @@ const FoodItems = () => {
     });
   };
 
-  // 👇 Refresh handler — ye button se refresh ho raha hai 
-   
+  // 👇 Refresh handler — ye button se refresh ho raha hai
+
   // const handleRefresh = useCallback(() => {
   //   setShuffleSeed((prev) => prev + 1);
   //   setPage(1);
@@ -91,12 +97,82 @@ const FoodItems = () => {
     dispatch(setSearch(""));
     setSortBy("");
     setPage(1);
-    setShuffleSeed(0); // 👈 reset shuffle on clear too yes 
+    setShuffleSeed(0); // 👈 reset shuffle on clear too yes
   };
+
+  // const handleWishlist = (product) => {
+  //   console.log("wishlist is clickedd")
+  //    console.log("product =", product);
+  //   let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+  //   const exists = wishlist.find((item) => item.id === product.id);
+
+  //   if (exists) {
+  //     wishlist = wishlist.filter((item) => item.id !== product.id);
+  //   } else {
+  //     wishlist.push(product);
+  //   }
+
+  //   localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  // };
+
+
+  const handleWishlist = (product) => {
+  let wishlist =
+    JSON.parse(localStorage.getItem("wishlist")) || [];
+
+  // remove null values
+  wishlist = wishlist.filter((item) => item !== null);
+
+  const exists = wishlist.find(
+    (item) => item.id === product.id
+  );
+
+  if (exists) {
+    wishlist = wishlist.filter(
+      (item) => item.id !== product.id
+    );
+  } else {
+    wishlist.push(product);
+  }
+
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    window.dispatchEvent(new Event("wishlistUpdated"));
+
+};
+
+
+// const handleWishlist = (product) => {
+//   let wishlist =
+//     JSON.parse(localStorage.getItem("wishlist")) || [];
+
+//   const exists = wishlist.find(
+//     (item) => item.id === product.id
+//   );
+
+//   let updatedWishlist;
+
+//   if (exists) {
+//     updatedWishlist = wishlist.filter(
+//       (item) => item.id !== product.id
+//     );
+//   } else {
+//     updatedWishlist = [...wishlist, product];
+//   }
+
+//   localStorage.setItem(
+//     "wishlist",
+//     JSON.stringify(updatedWishlist)
+//   );
+
+//   setFavorites(updatedWishlist.map((item) => item.id));
+
+//   window.dispatchEvent(new Event("wishlistUpdated"));
+// };
 
   return (
     <>
-    {/*   this is a toaster */}
+      {/*   this is a toaster */}
       <Toaster position="top-center" reverseOrder={false} />
 
       {/* Controls */}
@@ -160,13 +236,22 @@ const FoodItems = () => {
                 handleToast={handleToast}
               />
               <button
-                onClick={() => toggleFavorite(food.id)}
-                className={`absolute top-2 right-2 text-2xl ${
+                // onClick={()=>handleWishlist}
+                  // onClick={() => toggleFavorite(food.id)}
+                onClick={() => {
+  // console.log("1");
+  handleWishlist(food);
+  // console.log("2");
+  toggleFavorite(food.id);
+  console.log("favorites after click:", favorites);
+  // console.log("3");
+}}
+                className={`absolute top-2 right-2 text-2xl hover:scale-125 ${
                   favorites.includes(food.id) ? "text-red-500" : "text-gray-300"
-                } hover:text-red-600 transition-colors`}
+                }  transition-colors`}
                 aria-label={
                   favorites.includes(food.id)
-                    ? "Remove from favorites"
+                    ? "Remove from favorites animate-pulse"
                     : "Add to favorites"
                 }
               >
@@ -212,7 +297,9 @@ const FoodItems = () => {
               key={idx}
               onClick={() => setPage(idx + 1)}
               className={`px-3 py-1 rounded ${
-                page === idx + 1 ? "bg-blue-500 text-white" : "bg-black text-white"
+                page === idx + 1
+                  ? "bg-blue-500 text-white"
+                  : "bg-black text-white"
               }`}
             >
               {idx + 1}

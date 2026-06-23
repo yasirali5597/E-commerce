@@ -14,6 +14,7 @@ import HomePage from "./components/HomePage.jsx";
 import ProductDetails from "./pages/ProductDetails.jsx";
 import Product from "./Navbar/Products..jsx";
 import Cart from "./Navbar/Cart.jsx";
+import Wishlist from "./Navbar/WishList.jsx";
 
 
 const App = () => {
@@ -25,7 +26,7 @@ const App = () => {
           <Route path="/product/:id" element={<ProductDetails/>} />
           <Route path="/product" element={<Product/>} />
           <Route path="/cart" element={<Cart/>} />
-          <Route path="/WishList" element={<ProductDetails/>} />
+          <Route path="/wishlist" element={<Wishlist/>} />
 
 
 

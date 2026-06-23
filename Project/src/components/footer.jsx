@@ -8,13 +8,13 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white m">
-      <div className="max-w-7xl mx-auto px-8 py-16">
+    <footer className="bg-black text-white w-full">
+      <div className=" mx-auto px-8 py-16 w-full">
         {/* Top Section */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
           <div>
             {/* <h1 className="text-4xl font-bold">LOGO</h1> */}
-             <h1 className="text-2xl md:text-3xl font-extrabold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+             <h1 className="w-full text-2xl md:text-3xl font-extrabold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
               E-Commerce
             </h1>
             <p className="text-gray-400 mt-2 uppercase tracking-wider">

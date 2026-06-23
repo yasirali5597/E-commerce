@@ -83,7 +83,7 @@ const Cart = () => {
                   </p>
                 </div>
 
-                <div className="flex flex-col items-center gap-2">
+                <div className="flex flex-col items-center gap-2 text-blue-600">
                   <p className="font-bold text-lg">
                     ₹{item.price * item.qty}
                   </p>
