@@ -1,6 +1,7 @@
 import React,{useState , useEffect} from "react";
 import {useNavigate} from "react-router-dom"
 import {toast} from "react-toastify"
+import Navbar from "../components/Navbar";
 
 const Signup = () => {
 
@@ -41,7 +42,9 @@ const Signup = () => {
 
     const navigate = useNavigate();
   return (
-    <div className="w-full h-screen flex flex-col justify-center items-center bg-black text-white">
+    <div>
+     <Navbar/>
+      <div className="w-full h-screen flex flex-col justify-center items-center bg-black text-white">
       <form 
       onSubmit={handleSubmit}
       className="border border-emerald-600 p-10 rounded-md w-[350px]">
@@ -116,6 +119,7 @@ const Signup = () => {
           </span>
         </p>
       </form>
+    </div>
     </div>
   );
 };

@@ -2,6 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import Footer from "../components/footer";
+import Navbar from "../components/Navbar";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -28,8 +30,11 @@ const Login = () => {
 
 
   return (
-    // <div>
+    <div>
+      <Navbar/>
+
     <div className="w-full h-screen flex flex-col justify-center items-center bg-black  text-white border">
+   
       <form
         onSubmit={handleSubmit}
         className="border border-emerald-600 p-10 rounded-md "
@@ -71,7 +76,7 @@ const Login = () => {
       </form>
     </div>
 
-    // </div>
+     </div>
   );
 };
 

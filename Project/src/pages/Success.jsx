@@ -50,7 +50,7 @@ const Success = ({
     if (!loading && countdown === 0) {
       // toast.success("Order Successfull !")
 
-      navigate("/Dashboard");
+      navigate("/dashboard");
       window.location.reload();
     }
   }, [countdown, loading, navigate, redirectTo]);

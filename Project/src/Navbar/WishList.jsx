@@ -160,7 +160,7 @@ const Wishlist = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
   {wishlist.length === 0 ? (
-    <p className="text-white font-bold  text-xl ">No items in wishlist</p>
+    <p className="text-red-600 font-bold  text-xl ">No items in wishlist</p>
   ) : (
     wishlist.map((item) => (
       <div
