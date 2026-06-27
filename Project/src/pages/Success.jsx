@@ -335,6 +335,8 @@ import { PropagateLoader } from "react-spinners";
 import { CheckCircle } from "lucide-react";
 import Confetti from "react-confetti";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../redux/slices/CartSlice";
 
 const Success = ({
   waitTime = 3000,
@@ -354,6 +356,15 @@ const Success = ({
     width: window.innerWidth,
     height: window.innerHeight,
   });
+
+  const dispatch = useDispatch();
+
+useEffect(() => {
+  if (!loading && countdown === 0) {
+    dispatch(clearCart());          // Cart empty
+    navigate("/dashboard", { replace: true });
+  }
+}, [countdown, loading, navigate, dispatch]);
 
   const intervalRef = useRef(null);
 
