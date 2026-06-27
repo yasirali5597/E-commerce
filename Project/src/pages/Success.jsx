@@ -1,114 +1,114 @@
 
 
-import React, { useEffect, useState, useRef } from "react";
-import { PropagateLoader } from "react-spinners";
-import { CheckCircle } from "lucide-react";
-import Confetti from "react-confetti";
-import { useNavigate } from "react-router-dom";
+// import React, { useEffect, useState, useRef } from "react";
+// import { PropagateLoader } from "react-spinners";
+// import { CheckCircle } from "lucide-react";
+// import Confetti from "react-confetti";
+// import { useNavigate } from "react-router-dom";
 
-const Success = ({
-  waitTime = 3000, // Time spinner shows before success message (ms)
-  redirectTo = "/", // Redirect path after countdown
-  title = "Order Successful!",
-  message = "Thank you for your purchase. Your order has been placed and is being processed.",
-  countdownStart = 5, // Countdown seconds before redirect
-}) => {
-  const [loading, setLoading] = useState(true);
-  const [countdown, setCountdown] = useState(countdownStart);
-  const [confettiDimensions, setConfettiDimensions] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
-  const [isPaused, setIsPaused] = useState(false);
+// const Success = ({
+//   waitTime = 3000, // Time spinner shows before success message (ms)
+//   redirectTo = "/", // Redirect path after countdown
+//   title = "Order Successful!",
+//   message = "Thank you for your purchase. Your order has been placed and is being processed.",
+//   countdownStart = 5, // Countdown seconds before redirect
+// }) => {
+//   const [loading, setLoading] = useState(true);
+//   const [countdown, setCountdown] = useState(countdownStart);
+//   const [confettiDimensions, setConfettiDimensions] = useState({
+//     width: window.innerWidth,
+//     height: window.innerHeight,
+//   });
+//   const [isPaused, setIsPaused] = useState(false);
 
-  const navigate = useNavigate();
-  const countdownIntervalRef = useRef(null);
+//   const navigate = useNavigate();
+//   const countdownIntervalRef = useRef(null);
 
-  // 1. Show spinner for waitTime, then show success message
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-      console.log("Success: Order placed - event logged");
-    }, waitTime);
-    return () => clearTimeout(timer);
+//   // 1. Show spinner for waitTime, then show success message
+//   useEffect(() => {
+//     const timer = setTimeout(() => {
+//       setLoading(false);
+//       console.log("Success: Order placed - event logged");
+//     }, waitTime);
+//     return () => clearTimeout(timer);
     
 
-  }, [waitTime]);
+//   }, [waitTime]);
 
-  // 2. Handle countdown timer logic
-  useEffect(() => {
-    if (!loading && countdown > 0 && !isPaused) {
-      countdownIntervalRef.current = setInterval(() => {
-        setCountdown((c) => c - 1);
-      }, 1000);
-    }
-    return () => clearInterval(countdownIntervalRef.current);
-  }, [loading, countdown, isPaused]);
+//   // 2. Handle countdown timer logic
+//   useEffect(() => {
+//     if (!loading && countdown > 0 && !isPaused) {
+//       countdownIntervalRef.current = setInterval(() => {
+//         setCountdown((c) => c - 1);
+//       }, 1000);
+//     }
+//     return () => clearInterval(countdownIntervalRef.current);
+//   }, [loading, countdown, isPaused]);
 
-  // 3. Redirect after countdown hits zero
-  useEffect(() => {
-    if (!loading && countdown === 0) {
-      // toast.success("Order Successfull !")
+//   // 3. Redirect after countdown hits zero
+//   useEffect(() => {
+//     if (!loading && countdown === 0) {
+//       // toast.success("Order Successfull !")
 
-      navigate("/dashboard");
-      window.location.reload();
-    }
-  }, [countdown, loading, navigate, redirectTo]);
+//       navigate("/dashboard");
+//       window.location.reload();
+//     }
+//   }, [countdown, loading, navigate, redirectTo]);
 
-  // 4. Update confetti size on window resize
-  useEffect(() => {
-    const handleResize = () => {
-      setConfettiDimensions({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+//   // 4. Update confetti size on window resize
+//   useEffect(() => {
+//     const handleResize = () => {
+//       setConfettiDimensions({
+//         width: window.innerWidth,
+//         height: window.innerHeight,
+//       });
+//     };
+//     window.addEventListener("resize", handleResize);
+//     return () => window.removeEventListener("resize", handleResize);
    
 
-  }, []);
+//   }, []);
 
-  return (
-    <div
-      className="flex items-center justify-center h-screen bg-gradient-to-br from-green-100 via-white to-blue-100"
-      role="alert"
-      aria-live="assertive"
-    >
-      {loading ? (
-        <PropagateLoader color="#10b981" size={20} aria-label="Loading spinner" />
-      ) : (
-        <>
-          <Confetti
-            width={confettiDimensions.width}
-            height={confettiDimensions.height}
-            numberOfPieces={150}
-            recycle={false}
-            run={!isPaused}
-          />
-          <div
-            className="bg-white shadow-xl rounded-2xl p-10 max-w-2xl w-full text-center animate-fade-in-up"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-            tabIndex={0}
-            aria-label="Order success message. Countdown paused on focus or hover."
-          >
-            <CheckCircle className="mx-auto text-green-500" size={72} aria-hidden="true" />
-            <h2 className="text-4xl font-bold mt-4 text-gray-800">{title}</h2>
-            <p className="text-lg text-gray-600 mt-4">{message}</p>
-            <p className="text-sm text-gray-500 mt-6">
-              Redirecting in {countdown} second{countdown !== 1 ? "s" : ""}...
-              <br />
-              (Hover here to pause)
-            </p>
-          </div>
-        </>
-      )}
-    </div>
-  );
-};
+//   return (
+//     <div
+//       className="flex items-center justify-center h-screen bg-gradient-to-br from-green-100 via-white to-blue-100"
+//       role="alert"
+//       aria-live="assertive"
+//     >
+//       {loading ? (
+//         <PropagateLoader color="#10b981" size={20} aria-label="Loading spinner" />
+//       ) : (
+//         <>
+//           <Confetti
+//             width={confettiDimensions.width}
+//             height={confettiDimensions.height}
+//             numberOfPieces={150}
+//             recycle={false}
+//             run={!isPaused}
+//           />
+//           <div
+//             className="bg-white shadow-xl rounded-2xl p-10 max-w-2xl w-full text-center animate-fade-in-up"
+//             onMouseEnter={() => setIsPaused(true)}
+//             onMouseLeave={() => setIsPaused(false)}
+//             tabIndex={0}
+//             aria-label="Order success message. Countdown paused on focus or hover."
+//           >
+//             <CheckCircle className="mx-auto text-green-500" size={72} aria-hidden="true" />
+//             <h2 className="text-4xl font-bold mt-4 text-gray-800">{title}</h2>
+//             <p className="text-lg text-gray-600 mt-4">{message}</p>
+//             <p className="text-sm text-gray-500 mt-6">
+//               Redirecting in {countdown} second{countdown !== 1 ? "s" : ""}...
+//               <br />
+//               (Hover here to pause)
+//             </p>
+//           </div>
+//         </>
+//       )}
+//     </div>
+//   );
+// };
 
-export default Success;
+// export default Success;
 
 
 
@@ -327,3 +327,145 @@ export default Success;
 // };
 
 // export default Success;
+
+
+
+import React, { useEffect, useRef, useState } from "react";
+import { PropagateLoader } from "react-spinners";
+import { CheckCircle } from "lucide-react";
+import Confetti from "react-confetti";
+import { useNavigate } from "react-router-dom";
+
+const Success = ({
+  waitTime = 3000,
+  redirectTo = "/dashboard",
+  title = "Order Successful!",
+  message =
+    "Thank you for your purchase. Your order has been placed and is being processed.",
+  countdownStart = 5,
+}) => {
+  const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(true);
+  const [countdown, setCountdown] = useState(countdownStart);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const [confettiDimensions, setConfettiDimensions] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  const intervalRef = useRef(null);
+
+  // Loading Timer
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, waitTime);
+
+    return () => clearTimeout(timer);
+  }, [waitTime]);
+
+  // Countdown Timer
+  useEffect(() => {
+    if (loading || isPaused) return;
+
+    intervalRef.current = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          clearInterval(intervalRef.current);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(intervalRef.current);
+  }, [loading, isPaused]);
+
+  // Redirect
+  useEffect(() => {
+    if (!loading && countdown === 0) {
+      navigate(redirectTo, { replace: true });
+    }
+  }, [countdown, loading, navigate, redirectTo]);
+
+  // Responsive Confetti
+  useEffect(() => {
+    const handleResize = () => {
+      setConfettiDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return (
+    <div
+      className="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-100 via-white to-blue-100"
+      role="alert"
+      aria-live="assertive"
+    >
+      {loading ? (
+        <PropagateLoader
+          color="#10b981"
+          size={18}
+          aria-label="Loading..."
+        />
+      ) : (
+        <>
+          <Confetti
+            width={confettiDimensions.width}
+            height={confettiDimensions.height}
+            numberOfPieces={180}
+            recycle={false}
+            run={!isPaused}
+          />
+
+          <div
+            className="bg-white shadow-xl rounded-2xl p-10 max-w-xl w-full text-center"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            tabIndex={0}
+          >
+            <CheckCircle
+              className="mx-auto text-green-500"
+              size={72}
+            />
+
+            <h2 className="text-4xl font-bold mt-5 text-gray-800">
+              {title}
+            </h2>
+
+            <p className="text-gray-600 mt-4">
+              {message}
+            </p>
+
+            <p className="mt-6 text-gray-500">
+              {isPaused
+                ? "⏸ Countdown Paused"
+                : `Redirecting in ${countdown} second${
+                    countdown !== 1 ? "s" : ""
+                  }...`}
+            </p>
+
+            <button
+              onClick={() =>
+                navigate(redirectTo, { replace: true })
+              }
+              className="mt-6 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg transition"
+            >
+              Go to Dashboard
+            </button>
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
+export default Success;

@@ -11,22 +11,49 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {   
-    e.preventDefault();
-    const isLoggedIn = JSON.parse(localStorage.getItem("user"));
+  // const handleSubmit = (e) => {   
+  //   e.preventDefault();
+  //   const isLoggedIn = JSON.parse(localStorage.getItem("user"));
 
-    if (!isLoggedIn) {
-      toast.error("No Account founD! please sign up first");
-      return;
-    }
-    if (email !== isLoggedIn.email || password !== isLoggedIn.password) {
-      toast.error(`Invalid credentials! please try again, ${isLoggedIn?.name || ""}`, { autoClose: 5000 });
-      navigate("/");
-    }
-    toast.success(`Login successful! Welcome back, ${isLoggedIn.name}!`);
-    // toast.success(`Welcome ${isLoggedIn.name}!`); 
-    navigate("/Dashboard");
-  };
+  //   if (!isLoggedIn) {
+  //     toast.error("No Account founD! please sign up first");
+  //     return;
+  //   }
+  //   if (email !== isLoggedIn.email || password !== isLoggedIn.password) {
+  //     toast.error(`Invalid credentials! please try again, ${isLoggedIn?.name || ""}`, { autoClose: 5000 });
+  //     navigate("/");
+  //   }
+  //   toast.success(`Login successful! Welcome back, ${isLoggedIn.name}!`);
+  //   // toast.success(`Welcome ${isLoggedIn.name}!`); 
+  //   navigate("/Dashboard");
+  // };
+
+  const handleSubmit = (e) => {
+  e.preventDefault();
+
+  const isLoggedIn = JSON.parse(localStorage.getItem("user"));
+
+  if (!isLoggedIn) {
+    toast.error("No Account Found! Please sign up first");
+    return;
+  }
+
+  if (
+    email !== isLoggedIn.email ||
+    password !== isLoggedIn.password
+  ) {
+    toast.error(
+      `Invalid credentials! Please try again.`
+    );
+    return; //  Stop execution here kia ja raha hai or upper me pass ker raha tha 
+  }
+
+  toast.success(
+    `Login successful! Welcome back, ${isLoggedIn.name}!`
+  );
+
+  navigate("/Dashboard");
+};
 
 
   return (

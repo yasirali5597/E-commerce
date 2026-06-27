@@ -24,7 +24,7 @@ const FoodItems = () => {
   const search = useSelector((state) => state.search.search);
   const [sortBy, setSortBy] = useState("");
   const [page, setPage] = useState(1);
-  const [shuffleSeed, setShuffleSeed] = useState(0); // 👈 triggers re-shuffle
+  const [shuffleSeed, setShuffleSeed] = useState(0); //  triggers re-shuffle
 
   // const [favorites, setFavorites] = useState(() => {
   //   const saved = localStorage.getItem("favorites");
@@ -53,7 +53,7 @@ const FoodItems = () => {
     });
   };
 
-  // 👇 Refresh handler — ye button se refresh ho raha hai
+  //  Refresh handler — ye button se refresh ho raha hai
 
   // const handleRefresh = useCallback(() => {
   //   setShuffleSeed((prev) => prev + 1);
@@ -72,7 +72,7 @@ const FoodItems = () => {
       }
     });
 
-    // 👇 Shuffle first, then sort (sort overrides shuffle if selected)
+    //  Shuffle first, then sort (sort overrides shuffle if selected)
     filteredFood = shuffleArray(filteredFood);
 
     if (sortBy === "price-asc") {
@@ -84,7 +84,7 @@ const FoodItems = () => {
     }
 
     return filteredFood;
-  }, [category, search, sortBy, shuffleSeed]); // 👈 shuffle cards  in deps
+  }, [category, search, sortBy, shuffleSeed]); //  shuffle cards  in deps
 
   const pageCount = Math.ceil(filteredAndSortedFood.length / ITEMS_PER_PAGE);
   const currentPageItems = filteredAndSortedFood.slice(
@@ -97,7 +97,7 @@ const FoodItems = () => {
     dispatch(setSearch(""));
     setSortBy("");
     setPage(1);
-    setShuffleSeed(0); // 👈 reset shuffle on clear too yes
+    setShuffleSeed(0); //  reset shuffle on clear too yes
   };
 
   // const handleWishlist = (product) => {
@@ -193,7 +193,7 @@ const FoodItems = () => {
         </select>
 
         <div className="flex gap-3">
-          {/* 👇 Refresh Button */}
+          {/*  Refresh Button */}
           {/* <button
             onClick={handleRefresh}
             className="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-700 transition-colors flex items-center gap-2"
