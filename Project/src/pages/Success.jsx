@@ -344,7 +344,7 @@ const Success = ({
   title = "Order Successful!",
   message =
     "Thank you for your purchase. Your order has been placed and is being processed.",
-  countdownStart = 5,
+  countdownStart = 3,
 }) => {
   const navigate = useNavigate();
 
